@@ -1,3 +1,12 @@
+:root {
+  --footer-height: 30px;
+  --bg-color: #282c34;
+}
+
+body {
+  background-color: var(--bg-color);
+}
+
 .t-center {
   text-align: center;
 }
@@ -11,7 +20,8 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #a7d1df;
+  padding-bottom: calc(var(--footer-height) + 20px);
+  overflow-y: auto;
 }
 
 .tenzie_board {
@@ -105,4 +115,43 @@ button {
   to {
     transform: scale(1.15);
   }
+}
+
+/* Footer */
+.app-footer {
+  margin-top: auto;
+  padding: 12px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #bdbdbd;
+  background: transparent;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--footer-height);
+  background-color: black;
+}
+
+.app-footer p {
+  margin: 0;
+}
+
+.footer-links {
+  margin-top: 6px;
+}
+
+.footer-links a {
+  color: cyan;
+  text-decoration: none;
+  margin: 0 6px;
+  font-weight: 500;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-links span {
+  color: #666;
 }
