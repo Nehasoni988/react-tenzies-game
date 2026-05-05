@@ -1,70 +1,108 @@
-# Getting Started with Create React App
+# 🎲 Tenzies — React Dice Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+🚀 **Live Demo:** https://online-react-tenzies-game.vercel.app/
 
-## Available Scripts
+A fully playable browser-based implementation of the classic **Tenzies** dice game, built with React. The goal is simple: roll ten dice, hold the ones you want to keep, and keep rolling until all ten show the same number. The game tracks your roll count and elapsed time so you can compete against your own best.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## How to Play
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Click **Start Game** to begin
+2. Ten dice are rolled automatically
+3. Click any die to **hold** it — held dice won't be re-rolled
+4. You can only hold dice that **share the same value** — mixed holds are not allowed
+5. Keep rolling until all ten dice show the same number
+6. Win! Click **Begin New Game** to play again and beat your time
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 🎲 **10 dice board** — randomly generated on every roll
+- 🔒 **Hold mechanic** — click to lock dice; same-value rule enforced with inline error messages
+- ⏱ **Live timer** — starts on first roll, stops when you win
+- 📊 **Stats panel** — tracks rolls taken, time elapsed, and best time
+- ✅ **Win detection** — automatically detected when all dice match; board highlights on victory
+- 🔁 **New game reset** — cleanly resets all state, dice values, and the timer
+- ⚠️ **Error notifications** — auto-dismissing messages for invalid moves (5 second timeout)
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| | |
+|---|---|
+| Framework | [React 19](https://react.dev) |
+| Bootstrapped with | [Create React App](https://create-react-app.dev) |
+| Language | JavaScript (ES6+) |
+| Styling | CSS |
+| Testing | [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) + Jest |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Project Structure
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+src/
+├── components/
+│   ├── GameBoard.js   # Core game logic — state, timer, roll & hold handlers
+│   ├── Dice.js        # Individual die — displays value, held & winner states
+│   ├── Action.js      # Start / Roll / New Game button based on game state
+│   ├── Stats.js       # Rolls, time, and best time display
+│   ├── Notify.js      # Auto-dismissing error/info toast
+│   ├── Header.js      # App header
+│   └── Footer.js      # App footer
+├── utils/
+│   └── helper.js      # createDicesData(), generateRandomNumberForDice()
+├── App.js             # Root component — composes Header, GameBoard, Footer
+└── App.css            # Global styles
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Setup & Installation
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Prerequisites
 
-## Learn More
+- [Node.js](https://nodejs.org) v16 or higher
+- [npm](https://www.npmjs.com) v8 or higher
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Steps
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+# 1. Clone the repository
+git clone https://github.com/your-username/react-tenzies-game.git
+cd react-tenzies-game
 
-### Code Splitting
+# 2. Install dependencies
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# 3. Start the development server
+npm start
+```
 
-### Analyzing the Bundle Size
+The app will open at **http://localhost:3000**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Other Scripts
 
-### Making a Progressive Web App
+```bash
+npm run build    # Build for production
+npm test         # Run tests with Jest and React Testing Library
+npm run eject    # Eject from Create React App (irreversible)
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## Implementation Notes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- **Game state lives in `GameBoard`** — a single component owns dice state, win detection, timer, stats, and error messaging, keeping the data flow straightforward
+- **Timer uses `useRef`** — the interval reference is stored in a ref rather than state so starting/stopping it doesn't trigger re-renders
+- **Hold validation** — before allowing a hold, the game checks whether any die is already held; if so, only dice with a matching value can be held, preventing invalid mixed selections
+- **Win detection** — after each hold, the board checks if any die still has a different value from the first held die; if none remain, the game is won
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Developed By
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Neha Soni** · 2026
